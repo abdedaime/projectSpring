@@ -1,0 +1,15 @@
+@CHARSET "ISO-8859-1";
+
+ .logo {
+
+   width: 200px;
+   height: 100px;
+  background-size: cover;
+ }
+ 
+  body {
+	margin-top: 5px;
+}
+
+
+
