@@ -81,7 +81,7 @@
 				</div>
 
 				<div class="form-group">
-					<label for="icode" class="col-md-3 control-label">Date de
+					<label for="date" class="col-md-3 control-label">Date de
 						Naissance</label>
 					<div class="col-md-9">
 						<form:input path="dateNaissance" class="form-control" id="date"

@@ -30,6 +30,10 @@ public class IndexController {
 	@Autowired
 	private IServiceUser iservice;
 
+	@RequestMapping("/")
+	public String indexz() {
+		return "index";
+	}
 	@RequestMapping("/index.htm")
 	public String index() {
 		return "index";

@@ -157,19 +157,26 @@
 			<artifactId>mail</artifactId>
 			<version>1.4.7</version>
 		</dependency>
-		<!-- smtpppp    l'envoi des emails -->
+		<!-- smtpppp l'envoi des emails -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
 			<version>${org.springframework.version}</version>
 		</dependency>
-     
-	<dependency>
-	<groupId>org.hibernate</groupId>
-	<artifactId>hibernate-validator</artifactId>
-	<version>4.3.2.Final</version>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.3.2.Final</version>
+		</dependency>
+ 
+    <dependency>
+    <groupId>cz.jirutka.validator</groupId>
+    <artifactId>validator-spring</artifactId>
+    <version>1.1.0</version>
 </dependency>
-	
+
+    
 
 
 	</dependencies>

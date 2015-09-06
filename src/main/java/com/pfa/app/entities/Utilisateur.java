@@ -17,8 +17,12 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.pfa.app.annotation.FieldMatch;
 import com.pfa.app.annotation.UniqueUsername;
-
+//https://github.com/jirutka/validator-spring
+@FieldMatch.List({
+    @FieldMatch(first = "password", second = "confirmepass", message ="Mot de passe non conforme"),
+})
 @Entity
 @Table(name = "user")
 public class Utilisateur {
@@ -122,4 +126,6 @@ public class Utilisateur {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
+	
+	
 }
