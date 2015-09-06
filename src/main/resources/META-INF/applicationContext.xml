@@ -45,7 +45,7 @@
 <tx:annotation-driven transaction-manager="transactionManager" />
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="host" value="smtp.gmail.com"/>
-        <property name="port" value="465"/>
+        <property name="port" value="587"/>
         <property name="username" value="etud.hi@gmail.com"/>
         <property name="password" value="789a456z123e"/>
         <property name="javaMailProperties">
@@ -57,4 +57,5 @@
             </props>
         </property>
     </bean>
+    <import resource="security.xml"/>
 </beans>

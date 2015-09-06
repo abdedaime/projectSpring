@@ -28,6 +28,7 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 		<spring.security>3.2.3.RELEASE</spring.security>
 		<hibernate.entity.manager>4.3.11.Final</hibernate.entity.manager>
+		<spring.security.version>3.2.3.RELEASE</spring.security.version>
 	</properties>
 
 	<dependencies>
@@ -163,20 +164,41 @@
 			<artifactId>spring-context-support</artifactId>
 			<version>${org.springframework.version}</version>
 		</dependency>
+		<!-- hibernate validateur -->
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>4.3.2.Final</version>
 		</dependency>
- 
-    <dependency>
-    <groupId>cz.jirutka.validator</groupId>
-    <artifactId>validator-spring</artifactId>
-    <version>1.1.0</version>
-</dependency>
 
-    
+		<dependency>
+			<groupId>cz.jirutka.validator</groupId>
+			<artifactId>validator-spring</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+		<!-- sprin security taglibe -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		<!-- sprinf security web -->
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+       		<!-- sprinf security config -->
+       
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+
+
 
 
 	</dependencies>

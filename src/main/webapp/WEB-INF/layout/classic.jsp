@@ -41,12 +41,19 @@
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li class="${current == 'index' ? 'active' : ''}"><a
-							href="index.htm">Accueil</a></li>
+						<security:authorize access="hasRole('ROLE_ADMIN')">
+							<li class="${current == 'index' ? 'active' : ''}"><a
+								href="index.htm">Accueil</a></li>
+						</security:authorize>
 						<li><a href="#">Profil</a></li>
-						<li><a href="#">Déconnexion</a></li>
-						<li class="${current == 'login' ? 'active' : ''}"><a
-							href="login.htm">Authentification</a></li>
+						<security:authorize access="isAuthenticated()">
+							<li><a href="<spring:url value="/logout" />">Déconnexion</a></li>
+						</security:authorize>
+
+						<security:authorize access="!isAuthenticated()">
+							<li class="${current == 'login' ? 'active' : ''}"><a
+								href="login.htm">Authentification</a></li>
+						</security:authorize>
 
 
 					</ul>
@@ -90,16 +97,16 @@
 		src="<c:url   value="/resources/javascript/bootstrap-datetimepicker.fr.js" />">
 		
 	</script>
-	
-	<script   type="text/javascript"
+
+	<script type="text/javascript"
 		src="<c:url   value="/resources/javascript/jquery.validate.min.js" />">
 		
-	</script> 
+	</script>
 	<script type="text/javascript"
 		src="<c:url   value="/resources/javascript/app.js" />">
 		
 	</script>
-	
+
 
 </body>
 </html>
