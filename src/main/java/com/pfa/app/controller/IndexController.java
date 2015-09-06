@@ -2,11 +2,14 @@ package com.pfa.app.controller;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.Principal;
 import java.util.Date;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,65 +36,69 @@ public class IndexController {
 	private IServiceUser iservice;
 
 	@RequestMapping("/")
-public String indexz() {
-	return "index";
-}
+	public String indexz() {
+		return "index";
+	}
 
-@RequestMapping("/index.htm")
-public String index() {
-	return "index";
-}
+	@RequestMapping("/index.htm")
+	public String index(Model model, Principal pr) {
+		model.addAttribute("email", pr.getName());
+		Utilisateur u = iservice.getUser(pr.getName());
+		model.addAttribute("role",u.getRoles().get(0).toString());
+		model.addAttribute("user", u.toString());
 
-@RequestMapping(value = "/login.htm", method = RequestMethod.GET)
-public String login() {
+		return "index";
+	}
 
-	return "login";
-}
+	@RequestMapping(value = "/login.htm", method = RequestMethod.GET)
+	public String login() {
 
-@RequestMapping(value = "/register.htm", method = RequestMethod.GET)
-public String register(Model model) {
-	model.addAttribute("user", new Utilisateur());
-return "register";
-}
+		return "login";
+	}
 
-@RequestMapping(value = "/register.htm", method = RequestMethod.POST)
-public String login(@ModelAttribute("user") @Valid Utilisateur user,
-	BindingResult bin, Model model) {
-System.out.println("tessssssssssst" + bin.toString());
+	@RequestMapping(value = "/register.htm", method = RequestMethod.GET)
+	public String register(Model model) {
+		model.addAttribute("user", new Utilisateur());
+		return "register";
+	}
 
-if (bin.hasErrors()) {
-	// model.addAttribute("user", user);
-	model.addAttribute("succes", false);
-	bin.getErrorCount();
-	return "register";
+	@RequestMapping(value = "/register.htm", method = RequestMethod.POST)
+	public String login(@ModelAttribute("user") @Valid Utilisateur user,
+			BindingResult bin, Model model) {
+		System.out.println("tessssssssssst" + bin.toString());
 
-}
-else {
-     user.setConfirmepass(PasswordToMd5(user.getPassword()));
-	user.setPassword(PasswordToMd5(user.getPassword()));
-	user.setDate(new Date());
-	user.setEnabled(true);
-	iservice.add(user);
-	model.addAttribute("succes", true);
-	model.addAttribute("user", new Utilisateur());
+		if (bin.hasErrors()) {
+			// model.addAttribute("user", user);
+			model.addAttribute("succes", false);
+			bin.getErrorCount();
+			return "register";
 
-	return "register";
+		} else {
+			user.setConfirmepass(PasswordToMd5(user.getPassword()));
+			user.setPassword(PasswordToMd5(user.getPassword()));
+			user.setDate(new Date());
+			user.setEnabled(true);
+			iservice.add(user);
+			model.addAttribute("succes", true);
+			model.addAttribute("user", new Utilisateur());
+
+			return "register";
+
+		}
 
 	}
 
-}
+	@RequestMapping("/available.htm")
+	@ResponseBody
+	public String available(@RequestParam String email) {
+		Boolean available = iservice.getUser(email) == null;
+		return available.toString();
+	}
 
-@RequestMapping("/available.htm")
-@ResponseBody
-public String available(@RequestParam String email) {
-	Boolean available = iservice.getUser(email) == null;
-	return available.toString();
-}
-
-private String PasswordToMd5(String password) {
-	MessageDigest md = null;
-	try {
-		md = MessageDigest.getInstance("MD5");
+	private String PasswordToMd5(String password) {
+		MessageDigest md = null;
+		try {
+			md = MessageDigest.getInstance("MD5");
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
@@ -105,7 +112,7 @@ private String PasswordToMd5(String password) {
 					.substring(1));
 		}
 
-		 System.out.println(sb.toString());
+		System.out.println(sb.toString());
 		return sb.toString();
 
 	}

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -25,7 +26,7 @@ import com.pfa.app.annotation.UniqueUsername;
 })
 @Entity
 @Table(name = "user")
-public class Utilisateur {
+public class Utilisateur    {
 	@Id
 	@Email
 	@NotNull
@@ -71,7 +72,7 @@ public class Utilisateur {
 		this.date = date;
 	}
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user",fetch=FetchType.EAGER)
 	private List<Role> roles;
 
 	public List<Role> getRoles() {
@@ -126,6 +127,16 @@ public class Utilisateur {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
+
+	@Override
+	public String toString() {
+		return "Utilisateur [email=" + email + ", nom=" + nom + ", prenom="
+				+ prenom + ", dateNaissance=" + dateNaissance + ", date="
+				+ date + ", confirmepass=" + confirmepass + ", enabled="
+				+ enabled + ", password=" + password + "]";
+	}
+	
+	
 	
 	
 }
