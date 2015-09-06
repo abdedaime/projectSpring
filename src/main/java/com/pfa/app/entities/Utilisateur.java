@@ -44,7 +44,7 @@ public class Utilisateur {
 	private Date date;
 	@Transient
 	@NotNull
-	@Size(min = 5, max = 10)
+	@Size(min = 5, max = 32)
 	private String confirmepass;
 
 	public Date getDate() {
@@ -84,7 +84,7 @@ public class Utilisateur {
 
 	private boolean enabled;
 	@NotNull
-	@Size(min = 5, max = 10)
+	@Size(min = 5, max = 32)
 	private String password;
 
 	public String getPassword() {
