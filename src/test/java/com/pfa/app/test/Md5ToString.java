@@ -3,7 +3,11 @@ package com.pfa.app.test;
 import java.security.MessageDigest;
 
 import org.junit.Test;
-
+/**
+ * 
+ * @author hicham-pc
+ *
+ */
 public class Md5ToString {
 
 	@Test

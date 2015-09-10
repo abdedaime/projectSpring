@@ -5,6 +5,10 @@
 	<persistence-unit name="UP_Pfa"
 		transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>com.pfa.app.entities.Competence</class>
+		<class>com.pfa.app.entities.Cv</class>
+		<class>com.pfa.app.entities.Experience</class>
+		<class>com.pfa.app.entities.Formation</class>
 		<class>com.pfa.app.entities.Role</class>
 		<class>com.pfa.app.entities.Utilisateur</class>
 	

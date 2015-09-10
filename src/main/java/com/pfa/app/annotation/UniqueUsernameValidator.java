@@ -6,7 +6,11 @@ import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.pfa.app.service.IServiceUser;
-
+/**
+ * 
+ * @author hicham-pc
+ *
+ */
 public class UniqueUsernameValidator    implements  ConstraintValidator<UniqueUsername, String> {
      @Autowired
 	 private  IServiceUser  service;

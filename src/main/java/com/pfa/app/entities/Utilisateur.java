@@ -20,6 +20,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.pfa.app.annotation.FieldMatch;
 import com.pfa.app.annotation.UniqueUsername;
+/**
+ * 
+ * @author hicham-pc
+ *
+ */
 //https://github.com/jirutka/validator-spring
 @FieldMatch.List({
     @FieldMatch(first = "password", second = "confirmepass", message ="Mot de passe non conforme"),

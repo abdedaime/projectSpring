@@ -3,7 +3,11 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import org.apache.commons.beanutils.BeanUtils;
-
+/**
+ * 
+ * @author hicham-pc
+ *
+ */
 public class FieldMatchValidator implements ConstraintValidator<FieldMatch, Object>
 {
     private String firstFieldName;

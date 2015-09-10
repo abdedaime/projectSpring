@@ -8,7 +8,11 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
-
+/**
+ * 
+ * @author hicham-pc
+ *
+ */
 @Target({ FIELD })
 @Retention(RUNTIME)
 @Constraint(validatedBy = { UniqueUsernameValidator.class })
