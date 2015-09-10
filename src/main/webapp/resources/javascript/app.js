@@ -33,7 +33,35 @@ $(document).ready(function() {
 	/** pour valider le formulaire d'inscription* */
 
 		
-	
+	$("#loginform").validate({
+	    rules: {
+	        email: {
+	            email :true,
+	            minlength : 3,
+	            required: true
+	        },
+	        password: {
+	        	minlength : 5,
+	            required: true
+	        }
+	    },
+	    highlight: function(element) {
+			$(element).closest('.input-group').removeClass('has-success').addClass('has-error');
+			alert("errrrrrrrrrrro");
+		},
+		unhighlight: function(element) {
+			$(element).closest('.input-group').removeClass('has-error').addClass('has-success');
+		},
+	    messages: {
+	        email: {
+	            required: "Adresse email obligatoire"
+	        },
+	        password: {
+	            required: "Password obligatoire"
+	        }
+	    }
+	});
+
 	
 	
 	$("#signupform").validate(
@@ -93,4 +121,7 @@ $(document).ready(function() {
 			}
 		);
 	});
+
+	
+	
 

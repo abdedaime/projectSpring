@@ -3,16 +3,7 @@
 <%@ include file="../layout/taglib.jsp"%>
 
 <div class="container">
-	<c:if test="${succes  eq true}">
-		<div class="alert alert-success text-center">
-			<script type="text/javascript">
-				$('#loginbox').hide();
-				$('#signupbox').show();
-			</script>
-			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-			<strong>Error!</strong> Inscription Réussie
-		</div>
-	</c:if>
+
 	<div id="forgot" style="display: none; margin-top: 50px;"
 		class="mainbox  col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 		<div class="panel panel-info">
@@ -34,7 +25,7 @@
 
 					<div style="margin-bottom: 25px" class="input-group">
 						<span class="input-group-addon"><i
-							class="glyphicon glyphicon-user"></i></span> <input id="login-username"
+							class="glyphicon glyphicon-user"></i></span> <input id="username"
 							type="text" class="form-control" name="username" value=""
 							placeholder="email">
 					</div>
@@ -77,12 +68,12 @@
 			</div>
 
 			<div style="padding-top: 30px" class="panel-body">
-            <c:if test="${param. login_error  eq 1}">
-			<div class="alert alert-danger text-center">
+				<c:if test="${param. login_error  eq 1}">
+					<div class="alert alert-danger text-center">
 						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-						<strong>Erreur!</strong>  Données invalide   <br/>
+						<strong>Erreur!</strong> Données invalide <br />
 						<c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
-			</div>
+					</div>
 				</c:if>
 
 				<form id="loginform" class="form-horizontal" role="form"
@@ -90,15 +81,15 @@
 
 					<div style="margin-bottom: 25px" class="input-group">
 						<span class="input-group-addon"><i
-							class="glyphicon glyphicon-user"></i></span> <input id="login-username"
-							type="text" class="form-control" name="j_username"
+							class="glyphicon glyphicon-user"></i></span> <input id="email"
+							type="text" class="form-control" name="email"
 							placeholder="Email">
 					</div>
 
 					<div style="margin-bottom: 25px" class="input-group">
 						<span class="input-group-addon"><i
-							class="glyphicon glyphicon-lock"></i></span> <input id="login-password"
-							type="password" class="form-control" name="j_password"
+							class="glyphicon glyphicon-lock"></i></span> <input id="password"
+							type="password" class="form-control" name="password"
 							placeholder="Password">
 					</div>
 
@@ -142,3 +133,4 @@
 	</div>
 
 </div>
+
