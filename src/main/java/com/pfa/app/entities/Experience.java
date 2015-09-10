@@ -8,24 +8,39 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 /**
  * 
  * @author hicham-pc
- *
+ * 
  */
 @Entity
 public class Experience {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private  int id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 	private String commentaire;
 	private String entrerpise;
 	private String mission;
 	private Date dateDebut;
 	private Date dateFin;
 	@ManyToOne
-	@JoinColumn(name="idcv",referencedColumnName="id_cv")
+	@JoinColumn(name = "idcv", referencedColumnName = "id_cv")
 	private Cv cv;
+
+	public Experience() {
+		super();
+	}
+
+	public Experience(String commentaire, String entrerpise, String mission,
+			Date dateDebut, Date dateFin) {
+		super();
+		this.commentaire = commentaire;
+		this.entrerpise = entrerpise;
+		this.mission = mission;
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+	}
 
 	public Cv getCv() {
 		return cv;
@@ -34,7 +49,6 @@ public class Experience {
 	public void setCv(Cv cv) {
 		this.cv = cv;
 	}
-	
 
 	public int getId() {
 		return id;
