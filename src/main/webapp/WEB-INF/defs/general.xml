@@ -24,6 +24,11 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/register.jsp" />
 		<put-attribute name="current" value="login" />
 	</definition>
+	<definition name="saveCv" extends="common">
+		<put-attribute name="title" value="Créer votre cv" />
+		<put-attribute name="body" value="/WEB-INF/jsp/create-cv.jsp" />
+		<put-attribute name="current" value="cv" />
+	</definition>
 	
 	
 	

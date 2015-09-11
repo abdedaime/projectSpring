@@ -54,6 +54,10 @@
 							<li class="${current == 'login' ? 'active' : ''}"><a
 								href="login.htm">Authentification</a></li>
 						</security:authorize>
+												<security:authorize access="hasRole('ROLE_User')">
+							<li class="${current == 'cv' ? 'active' : ''}"><a
+								href="addCv.htm">Cv théque</a></li>
+						</security:authorize>
 
 
 					</ul>

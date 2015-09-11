@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 /**
  * 
  * @author hicham-pc
@@ -22,7 +24,10 @@ public class Cv {
 	@Column(name = "id_cv")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@NotNull
+	@Size(min=5)
 	private String titre;
+	@Size(min=10)
 	private String description;
 	@OneToMany(mappedBy = "cv", fetch = FetchType.EAGER)
 	private List<Formation> formations;

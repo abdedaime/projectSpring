@@ -18,11 +18,11 @@
 		<c:if   test="${succes eq true }"  >
 		  <div class="alert alert-success text-center">
 						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-						<strong>Info!</strong>   Registration sucessufl
+						<strong>Info!</strong>   Cv ajoutée
 					</div>
 		
 		  </c:if>
-			<form:form id="signupform" modelAttribute="user" method="post"
+			<form:form id="cvForm" modelAttribute="user" method="post"
 				class="form-horizontal" role="form">
 
 				<div id="signupalert" style="display: none"

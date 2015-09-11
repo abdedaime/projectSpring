@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.pfa.app.entities.Cv;
 import com.pfa.app.entities.Utilisateur;
 import com.pfa.app.service.IApplicationMailer;
 import com.pfa.app.service.IServiceUser;
+import com.pfa.app.service.IserviceCv;
 
 /**
  * 
@@ -32,17 +34,25 @@ public class IndexController {
 	private IApplicationMailer app;
 	@Autowired
 	private IServiceUser iservice;
+	@Autowired
+	private IserviceCv serviceCv;
 
 	@RequestMapping("/")
 	public String indexz() {
 		return "index";
 	}
 
+	@RequestMapping("/addCv.htm")
+	public String cv(Model model) {
+		model.addAttribute("cv", new Cv());
+		return "saveCv";
+	}
+
 	@RequestMapping("/index.htm")
 	public String index(Model model, Principal pr) {
 		model.addAttribute("email", pr.getName());
 		Utilisateur u = iservice.getUser(pr.getName());
-		model.addAttribute("role",u.getRoles().get(0).toString());
+		model.addAttribute("role", u.getRoles().get(0).toString());
 		model.addAttribute("user", u.toString());
 
 		return "index";
@@ -58,6 +68,21 @@ public class IndexController {
 	public String register(Model model) {
 		model.addAttribute("user", new Utilisateur());
 		return "register";
+	}
+
+	@RequestMapping(value = "/addCv.htm", method = RequestMethod.POST)
+	public String SaveCv(@ModelAttribute("cv") @Valid Cv cv,
+			BindingResult bind, Model model, Principal principal) {
+		Utilisateur user = iservice.getUser(principal.getName());
+		if (bind.hasErrors()) {
+			model.addAttribute("succes", false);
+
+			return "saveCv";
+		}
+		cv.setUser(user);
+		serviceCv.addCv(cv);
+		model.addAttribute("succes", true);
+		return "saveCv";
 	}
 
 	@RequestMapping(value = "/register.htm", method = RequestMethod.POST)
