@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pfa.app.entities.Cv;
+import com.pfa.app.entities.Formation;
 import com.pfa.app.entities.Utilisateur;
 import com.pfa.app.service.IApplicationMailer;
 import com.pfa.app.service.IServiceUser;
@@ -45,6 +46,7 @@ public class IndexController {
 	@RequestMapping("/addCv.htm")
 	public String cv(Model model) {
 		model.addAttribute("cv", new Cv());
+		model.addAttribute("formation", new Formation());
 		return "saveCv";
 	}
 
@@ -74,16 +76,37 @@ public class IndexController {
 	public String SaveCv(@ModelAttribute("cv") @Valid Cv cv,
 			BindingResult bind, Model model, Principal principal) {
 		Utilisateur user = iservice.getUser(principal.getName());
+		System.out.println(bind.toString());
 		if (bind.hasErrors()) {
 			model.addAttribute("succes", false);
-
+            
 			return "saveCv";
 		}
 		cv.setUser(user);
 		serviceCv.addCv(cv);
 		model.addAttribute("succes", true);
 		model.addAttribute("cv", new Cv());
-        return "saveCv";
+		return "saveCv";
+	}
+
+	@RequestMapping(value = "/addForm.htm", method = RequestMethod.POST)
+	public String SaveFormation(
+			@ModelAttribute("formation") @Valid Formation form,
+			BindingResult bind, Model model) {
+		// Utilisateur user = iservice.getUser(principal.getName());
+		if (bind.hasErrors()) {
+			model.addAttribute("succes", false);
+			model.addAttribute("cv", new Cv());
+
+			return "saveCv";
+		}
+		Cv cv = serviceCv.getCV(2);
+		form.setCv(cv);
+		serviceCv.addFormation(form);
+		model.addAttribute("succes", true);
+		model.addAttribute("formation", new Formation());
+		model.addAttribute("cv", new Cv());
+		return "saveCv";
 	}
 
 	@RequestMapping(value = "/register.htm", method = RequestMethod.POST)
@@ -136,7 +159,7 @@ public class IndexController {
 					.substring(1));
 		}
 
-		System.out.println(sb.toString());
+		// System.out.println(sb.toString());
 		return sb.toString();
 
 	}

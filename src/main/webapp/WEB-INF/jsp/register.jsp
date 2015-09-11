@@ -18,7 +18,7 @@
 		<c:if   test="${succes eq true }"  >
 		  <div class="alert alert-success text-center">
 						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-						<strong>Info!</strong>   Cv ajoutée
+						<strong>Info!</strong>   	Succes registration
 					</div>
 		
 		  </c:if>
@@ -84,7 +84,7 @@
 					<label for="date" class="col-md-3 control-label">Date de
 						Naissance</label>
 					<div class="col-md-9">
-						<form:input path="dateNaissance" class="form-control" id="date"
+						<form:input path="dateNaissance" class="form-control   madate"   id="date"
 							name="date" placeholder="Date de naissance" />
 						<form:errors path="dateNaissance" cssClass="text text-danger" />
 					</div>

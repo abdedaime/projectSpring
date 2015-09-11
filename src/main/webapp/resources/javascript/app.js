@@ -20,7 +20,17 @@ $(document).ready(function() {
 
 	// alert("helllllo date date time");
 	/* cette ligne pour utiliser calendar de bootstraap */
-	$('#date').datetimepicker({
+	$('.madate').datetimepicker({
+		todayBtn : "true",
+		format : "yyyy-mm-dd",
+		autoclose : "true",
+		pickerPosition : "bottom-left",
+		startView : "year",
+		minView : "month",
+		language : "fr"
+	});
+	
+	$('#datedebut').datetimepicker({
 		todayBtn : "true",
 		format : "yyyy-mm-dd",
 		autoclose : "true",

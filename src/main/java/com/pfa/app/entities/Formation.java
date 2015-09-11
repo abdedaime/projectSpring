@@ -12,12 +12,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  * 
  * @author hicham-pc
- *
+ * 
  */
 @Entity
 public class Formation implements Serializable {
@@ -26,7 +28,10 @@ public class Formation implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@NotNull
 	private String niveau;
+	@NotNull
+	@Size(min = 5)
 	private String diplome;
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-mm-dd")
@@ -36,6 +41,7 @@ public class Formation implements Serializable {
 	@DateTimeFormat(pattern = "yyyy-mm-dd")
 	@NotNull
 	private Date dateFin;
+
 	private String commentaire;
 	@ManyToOne
 	@JoinColumn(name = "idcv", referencedColumnName = "id_cv")
