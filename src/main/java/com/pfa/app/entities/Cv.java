@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.Type;
 /**
  * 
  * @author hicham-pc
@@ -28,6 +30,7 @@ public class Cv {
 	@Size(min=5)
 	private String titre;
 	@Size(min=10)
+	@Type(type="text")
 	private String description;
 	@OneToMany(mappedBy = "cv", fetch = FetchType.EAGER)
 	private List<Formation> formations;

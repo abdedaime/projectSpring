@@ -82,7 +82,8 @@ public class IndexController {
 		cv.setUser(user);
 		serviceCv.addCv(cv);
 		model.addAttribute("succes", true);
-		return "saveCv";
+		model.addAttribute("cv", new Cv());
+        return "saveCv";
 	}
 
 	@RequestMapping(value = "/register.htm", method = RequestMethod.POST)

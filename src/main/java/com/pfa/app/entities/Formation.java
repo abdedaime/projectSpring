@@ -9,6 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 /**
  * 
  * @author hicham-pc
@@ -23,7 +28,13 @@ public class Formation implements Serializable {
 	private int id;
 	private String niveau;
 	private String diplome;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-mm-dd")
+	@NotNull
 	private Date dateDebut;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-mm-dd")
+	@NotNull
 	private Date dateFin;
 	private String commentaire;
 	@ManyToOne
