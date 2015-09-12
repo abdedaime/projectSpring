@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.pfa.app.entities.Competence;
 import com.pfa.app.entities.Cv;
 import com.pfa.app.entities.Experience;
 import com.pfa.app.entities.Formation;
@@ -39,25 +40,25 @@ public class IndexController {
 	private IServiceUser iservice;
 	@Autowired
 	private IserviceCv serviceCv;
-	
-	
-	
-	
-	
+
 	@ModelAttribute("cv")
-	 public Cv  monCv(){
-		  return new Cv();
-	 }
+	public Cv monCv() {
+		return new Cv();
+	}
+
 	@ModelAttribute("formation")
-    public Formation  formation(){
-		 return new Formation();
+	public Formation formation() {
+		return new Formation();
 	}
+	@ModelAttribute("competence")
+	public Competence compt(){
+		return   new Competence();
+	}
+
 	@ModelAttribute("experience")
-	public Experience     experience(){
-		  return  new Experience();
+	public Experience experience() {
+		return new Experience();
 	}
-	
-	
 
 	@RequestMapping("/")
 	public String indexz() {
@@ -66,8 +67,8 @@ public class IndexController {
 
 	@RequestMapping("/addCv.htm")
 	public String cv(Model model) {
-	//	model.addAttribute("cv", new Cv());
-	//	model.addAttribute("formation", new Formation());
+		// model.addAttribute("cv", new Cv());
+		// model.addAttribute("formation", new Formation());
 		return "saveCv";
 	}
 
@@ -95,41 +96,88 @@ public class IndexController {
 
 	@RequestMapping(value = "/addCv.htm", method = RequestMethod.POST)
 	public String SaveCv(@ModelAttribute("cv") @Valid Cv cv,
-			BindingResult bind, Model model, Principal principal,HttpServletRequest request) {
+			BindingResult bind, Model model, Principal principal,
+			HttpServletRequest request) {
 		Utilisateur user = iservice.getUser(principal.getName());
 		System.out.println(bind.toString());
 		if (bind.hasErrors()) {
 			model.addAttribute("cvcreated", false);
-            
+
 			return "saveCv";
 		}
 		cv.setUser(user);
 		serviceCv.addCv(cv);
-		request.getSession().setAttribute("cvv",cv);
+		request.getSession().setAttribute("cvv", cv);
 		model.addAttribute("cvcreated", true);
-	  	model.addAttribute("cv", new Cv());
+		model.addAttribute("cv", new Cv());
 		return "saveCv";
 	}
 
-	@RequestMapping(value = "/addForm.htm", method = RequestMethod.POST)
-	public String SaveFormation(
-			@ModelAttribute("formation") @Valid Formation form,
-			BindingResult bind, Model model,HttpServletRequest request) {
+	@RequestMapping(value = "/addExper.htm", method = RequestMethod.POST)
+	public String SaveExper(
+			@ModelAttribute("experience") @Valid Experience exp,
+			BindingResult bind, Model model, Principal principal,
+			HttpServletRequest request) {
 		// Utilisateur user = iservice.getUser(principal.getName());
+		System.out.println(bind.toString());
 		if (bind.hasErrors()) {
-			model.addAttribute("succes", false);
-			//model.addAttribute("cv", new Cv());
+			model.addAttribute("expCreated", false);
 
 			return "saveCv";
 		}
-		//Cv cv = serviceCv.getCV(2);
-	  Cv    cv=	(Cv) request.getSession().getAttribute("cvv");
-	//  System.out.println("----------------------- :"+cv.getDescription());
+		final Cv cv = (Cv) request.getSession().getAttribute("cvv");
+		request.getSession().setAttribute("cvv", cv);
+		exp.setCv(cv);
+	//	System.out.println("--------------" + cv.getDescription());
+		serviceCv.addExperience(exp);
+		model.addAttribute("expCreated", true);
+		model.addAttribute("experience", new Experience());
+		return "saveCv";
+	}
+
+	
+	@RequestMapping(value = "/addCompet.htm", method = RequestMethod.POST)
+	public String SaveCmpt(
+			@ModelAttribute("competence") @Valid Competence cmp,
+			BindingResult bind, Model model, Principal principal,
+			HttpServletRequest request) {
+		// Utilisateur user = iservice.getUser(principal.getName());
+		System.out.println(bind.toString());
+		if (bind.hasErrors()) {
+			model.addAttribute("cmptCreated", false);
+
+			return "saveCv";
+		}
+		final Cv cv = (Cv) request.getSession().getAttribute("cvv");
+		request.getSession().setAttribute("cvv", cv);
+		cmp.setCv(cv);
+	//	System.out.println("--------------" + cv.getDescription());
+		serviceCv.addCompetence(cmp);
+		model.addAttribute("cmptCreated", true);
+		model.addAttribute("competence", new Competence());
+		return "saveCv";
+	}
+	
+	@RequestMapping(value = "/addForm.htm", method = RequestMethod.POST)
+	public String SaveFormation(
+			@ModelAttribute("formation") @Valid Formation form,
+			BindingResult bind, Model model, HttpServletRequest request) {
+		// Utilisateur user = iservice.getUser(principal.getName());
+		if (bind.hasErrors()) {
+			model.addAttribute("succes", false);
+			// model.addAttribute("cv", new Cv());
+
+			return "saveCv";
+		}
+		// Cv cv = serviceCv.getCV(2);
+		Cv cv = (Cv) request.getSession().getAttribute("cvv");
+		// System.out.println("----------------------- :"+cv.getDescription());
 		form.setCv(cv);
+		request.getSession().setAttribute("cvv", cv);
 		serviceCv.addFormation(form);
 		model.addAttribute("succes", true);
-		//model.addAttribute("formation", new Formation());
-		//model.addAttribute("cv", new Cv());
+		model.addAttribute("formation", new Formation());
+		// model.addAttribute("cv", new Cv());
 		return "saveCv";
 	}
 

@@ -13,7 +13,7 @@
 			<c:if test="${succes eq true }">
 				<div class="alert alert-success text-center">
 					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-					<strong>Info!</strong> Cv ajoutée
+					<strong>Info!</strong> Formation ajoutée
 				</div>
 
 			</c:if>

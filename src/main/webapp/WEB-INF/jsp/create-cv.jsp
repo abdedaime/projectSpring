@@ -246,8 +246,7 @@ span.round-tab:hover {
 						<jsp:include page="form-experience.jsp"></jsp:include>
 					</div>
 					<div class="tab-pane" role="tabpanel" id="complete">
-						<h3>Complete</h3>
-						<p>You have successfully completed all steps.</p>
+						  <jsp:include page="form-comptence.jsp"></jsp:include>
 					</div>
 					<div class="clearfix"></div>
 				</div>
