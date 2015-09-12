@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,21 @@ public class IndexController {
 	private IServiceUser iservice;
 	@Autowired
 	private IserviceCv serviceCv;
+	
+	
+	
+	
+	
+	@ModelAttribute("cv")
+	 public Cv  monCv(){
+		  return new Cv();
+	 }
+	@ModelAttribute("formation")
+    public Formation  formation(){
+		 return new Formation();
+	}
+	
+	
 
 	@RequestMapping("/")
 	public String indexz() {
@@ -45,8 +61,8 @@ public class IndexController {
 
 	@RequestMapping("/addCv.htm")
 	public String cv(Model model) {
-		model.addAttribute("cv", new Cv());
-		model.addAttribute("formation", new Formation());
+	//	model.addAttribute("cv", new Cv());
+	//	model.addAttribute("formation", new Formation());
 		return "saveCv";
 	}
 
@@ -74,38 +90,41 @@ public class IndexController {
 
 	@RequestMapping(value = "/addCv.htm", method = RequestMethod.POST)
 	public String SaveCv(@ModelAttribute("cv") @Valid Cv cv,
-			BindingResult bind, Model model, Principal principal) {
+			BindingResult bind, Model model, Principal principal,HttpServletRequest request) {
 		Utilisateur user = iservice.getUser(principal.getName());
 		System.out.println(bind.toString());
 		if (bind.hasErrors()) {
-			model.addAttribute("succes", false);
+			model.addAttribute("cvcreated", false);
             
 			return "saveCv";
 		}
 		cv.setUser(user);
 		serviceCv.addCv(cv);
-		model.addAttribute("succes", true);
-		model.addAttribute("cv", new Cv());
+		request.getSession().setAttribute("cvv",cv);
+		model.addAttribute("cvcreated", true);
+	  	model.addAttribute("cv", new Cv());
 		return "saveCv";
 	}
 
 	@RequestMapping(value = "/addForm.htm", method = RequestMethod.POST)
 	public String SaveFormation(
 			@ModelAttribute("formation") @Valid Formation form,
-			BindingResult bind, Model model) {
+			BindingResult bind, Model model,HttpServletRequest request) {
 		// Utilisateur user = iservice.getUser(principal.getName());
 		if (bind.hasErrors()) {
 			model.addAttribute("succes", false);
-			model.addAttribute("cv", new Cv());
+			//model.addAttribute("cv", new Cv());
 
 			return "saveCv";
 		}
-		Cv cv = serviceCv.getCV(2);
+		//Cv cv = serviceCv.getCV(2);
+	  Cv    cv=	(Cv) request.getSession().getAttribute("cvv");
+	//  System.out.println("----------------------- :"+cv.getDescription());
 		form.setCv(cv);
 		serviceCv.addFormation(form);
 		model.addAttribute("succes", true);
-		model.addAttribute("formation", new Formation());
-		model.addAttribute("cv", new Cv());
+		//model.addAttribute("formation", new Formation());
+		//model.addAttribute("cv", new Cv());
 		return "saveCv";
 	}
 

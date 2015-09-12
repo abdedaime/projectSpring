@@ -22,7 +22,7 @@
 					</div>
 		
 		  </c:if>
-			<form:form id="cvForm" modelAttribute="user" method="post"
+			<form:form id="signupform" modelAttribute="user" method="post"
 				class="form-horizontal" role="form">
 
 				<div id="signupalert" style="display: none"

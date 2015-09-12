@@ -194,11 +194,11 @@ span.round-tab:hover {
 
 								</div>
 								<div class="panel-body">
-									<c:if test="${succes eq true }">
+									<c:if test="${cvcreated eq true }">
 										<div class="alert alert-success text-center">
 											<a href="#" class="close" data-dismiss="alert"
 												aria-label="close">&times;</a> <strong>Info!</strong>
-											Registration sucessufl
+											Cv bien ajouté
 										</div>
 
 									</c:if>
