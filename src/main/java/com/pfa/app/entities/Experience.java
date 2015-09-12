@@ -8,6 +8,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 
@@ -19,10 +25,22 @@ public class Experience {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@NotNull
+	@Size(min=3,max=50)
 	private String commentaire;
+	@NotNull
+	@Size(min=3,max=20)
 	private String entrerpise;
+	@NotNull
+	@Size(min=3,max=20)
 	private String mission;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-mm-dd")
+	@NotNull
 	private Date dateDebut;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-mm-dd")
+	@NotNull
 	private Date dateFin;
 	@ManyToOne
 	@JoinColumn(name = "idcv", referencedColumnName = "id_cv")

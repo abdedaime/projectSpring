@@ -130,6 +130,39 @@ $(document).ready(function() {
 				}
 			}
 		);
+	//pour valider la form cv
+	$("#addcvForm").validate({
+	    rules: {
+	        titre: {
+	            
+	            minlength : 5,
+	            required: true
+	        },
+	        description: {
+	        	minlength : 10,
+	            required: true
+	        }
+	    },
+	    highlight: function(element) {
+			$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+			alert("errrrrrrrrrrro");
+		},
+		unhighlight: function(element) {
+			$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+		},
+//	    messages: {
+//	        email: {
+//	            required: "Adresse email obligatoire"
+//	        },
+//	        password: {
+//	            required: "Password obligatoire"
+//	        }
+//	    }
+	});
+
+	
+	
+	
 	});
 
 	

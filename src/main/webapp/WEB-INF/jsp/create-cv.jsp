@@ -190,7 +190,7 @@ span.round-tab:hover {
 							class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 							<div class="panel panel-info">
 								<div class="panel-heading">
-									<div class="panel-title">Sign Up</div>
+									<div class="panel-title">Cv</div>
 
 								</div>
 								<div class="panel-body">
@@ -243,15 +243,7 @@ span.round-tab:hover {
 						<jsp:include page="form-formation.jsp"></jsp:include>
 					</div>
 					<div class="tab-pane" role="tabpanel" id="step3">
-						<h3>Step 3</h3>
-						<p>This is step 3</p>
-						<ul class="list-inline pull-right">
-							<li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-							<li><button type="button" class="btn btn-default next-step">Skip</button></li>
-							<li><button type="button"
-									class="btn btn-primary btn-info-full next-step">Save
-									and continue</button></li>
-						</ul>
+						<jsp:include page="form-experience.jsp"></jsp:include>
 					</div>
 					<div class="tab-pane" role="tabpanel" id="complete">
 						<h3>Complete</h3>

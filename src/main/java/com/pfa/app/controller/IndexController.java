@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pfa.app.entities.Cv;
+import com.pfa.app.entities.Experience;
 import com.pfa.app.entities.Formation;
 import com.pfa.app.entities.Utilisateur;
 import com.pfa.app.service.IApplicationMailer;
@@ -50,6 +51,10 @@ public class IndexController {
 	@ModelAttribute("formation")
     public Formation  formation(){
 		 return new Formation();
+	}
+	@ModelAttribute("experience")
+	public Experience     experience(){
+		  return  new Experience();
 	}
 	
 	
