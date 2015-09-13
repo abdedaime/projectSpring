@@ -185,6 +185,7 @@ public class ParsesrXpathJava {
 			i++;
 
 		}
+		sql=sql+ "  or  c.nom ='"+langa+"' " + " group by c.cv.user ";
 		return sql;
 
 	}

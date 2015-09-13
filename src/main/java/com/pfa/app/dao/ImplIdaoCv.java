@@ -58,7 +58,7 @@ public class ImplIdaoCv implements IdaoCv {
 	@Override
 	public List<Competence> getCompetence(String mot) {
 		// TODO Auto-generated method stub
-		   
+     System.out.println("-----------la requetttte ---------------"+ParsesrXpathJava.construireSql(mot));
 		return em.createQuery(ParsesrXpathJava.construireSql(mot)).getResultList();
 	}
 

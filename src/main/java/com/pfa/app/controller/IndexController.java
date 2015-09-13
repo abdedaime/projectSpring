@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
 import java.util.Date;
 
+import javax.persistence.QueryHint;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -51,9 +52,10 @@ public class IndexController {
 	public Formation formation() {
 		return new Formation();
 	}
+
 	@ModelAttribute("competence")
-	public Competence compt(){
-		return   new Competence();
+	public Competence compt() {
+		return new Competence();
 	}
 
 	@ModelAttribute("experience")
@@ -81,6 +83,11 @@ public class IndexController {
 		model.addAttribute("user", u.toString());
 
 		return "index";
+	}
+	@RequestMapping(value = "/index.htm", method = RequestMethod.POST)
+	public String search(@RequestParam("search") String mot, Model model) {
+		model.addAttribute("userr", serviceCv.getCompetence(mot));
+        return "index";
 	}
 
 	@RequestMapping(value = "/login.htm", method = RequestMethod.GET)
@@ -129,17 +136,15 @@ public class IndexController {
 		final Cv cv = (Cv) request.getSession().getAttribute("cvv");
 		request.getSession().setAttribute("cvv", cv);
 		exp.setCv(cv);
-	//	System.out.println("--------------" + cv.getDescription());
+		// System.out.println("--------------" + cv.getDescription());
 		serviceCv.addExperience(exp);
 		model.addAttribute("expCreated", true);
 		model.addAttribute("experience", new Experience());
 		return "saveCv";
 	}
 
-	
 	@RequestMapping(value = "/addCompet.htm", method = RequestMethod.POST)
-	public String SaveCmpt(
-			@ModelAttribute("competence") @Valid Competence cmp,
+	public String SaveCmpt(@ModelAttribute("competence") @Valid Competence cmp,
 			BindingResult bind, Model model, Principal principal,
 			HttpServletRequest request) {
 		// Utilisateur user = iservice.getUser(principal.getName());
@@ -152,13 +157,13 @@ public class IndexController {
 		final Cv cv = (Cv) request.getSession().getAttribute("cvv");
 		request.getSession().setAttribute("cvv", cv);
 		cmp.setCv(cv);
-	//	System.out.println("--------------" + cv.getDescription());
+		// System.out.println("--------------" + cv.getDescription());
 		serviceCv.addCompetence(cmp);
 		model.addAttribute("cmptCreated", true);
 		model.addAttribute("competence", new Competence());
 		return "saveCv";
 	}
-	
+
 	@RequestMapping(value = "/addForm.htm", method = RequestMethod.POST)
 	public String SaveFormation(
 			@ModelAttribute("formation") @Valid Formation form,
@@ -198,11 +203,11 @@ public class IndexController {
 			user.setPassword(PasswordToMd5(user.getPassword()));
 			user.setDate(new Date());
 			user.setEnabled(true);
-			  Role  role=new Role();
-			  role.setUser(user);
-			  role.setRole(user.getType());
-			 
-			System.out.println("-------------------"+user.getType());
+			Role role = new Role();
+			role.setUser(user);
+			role.setRole(user.getType());
+
+			System.out.println("-------------------" + user.getType());
 			iservice.add(user);
 			iservice.addRole(role);
 			model.addAttribute("succes", true);

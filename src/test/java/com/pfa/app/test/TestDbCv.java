@@ -79,12 +79,14 @@ public class TestDbCv {
 	@Test
 	public void testGetcompetence() {
 
-		List<Competence> cmp = serviceCv.getCompetence("css");
+		List<Competence> cmp = serviceCv.getCompetence("java");
 
 		System.out.println("----------------------" + cmp.size());
+		
+	
 
 		Utilisateur user = cmp.get(0).getCv().getUser();
-		System.out.println("---------------"+user.toString());
+	//	System.out.println("---------------"+user.toString());
 
 	}
 
