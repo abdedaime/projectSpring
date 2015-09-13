@@ -48,14 +48,14 @@ public class ApplicationMailer implements IApplicationMailer {
 				+ "   <p><a class='btn btn-lg btn-success ' href='#' role='button'>Activer</a></p> "
 				+ "   </div> " + "	</div> " + " </body> " + "	</html>";
 
-		String htmlText = "<div style='background:#00FA9A;text-align:center;"
+	/*	String htmlText = "<div style='background:#00FA9A;text-align:center;"
 				+ "font-size:12pt;font-weight:bold;color:#800000;padding:10px;'>"
 				+ "That feeling when......<br /><br />"
 				+ "You miss your spectacles while looking for your spectacles....<br /><br />"
 				+ "The person whom you secretly dislike, helps you......<br /><br />"
 				+ "The person whom you have crush on seems happy all the time....<br /><br />"
 				+ "the beggar recognizes you and stops asking for penny from you since you have never given....<br /><br />"
-				+ "</div>";
+				+ "</div>";*/
 		helper.setText(string, true);
 		this.mailSender.send(mime);
 	}

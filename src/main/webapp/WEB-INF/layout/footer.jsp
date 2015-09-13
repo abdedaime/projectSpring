@@ -4,6 +4,6 @@
 
 
 <footer>
-	<div class="text text-center text-success">&copy; : hicham
-		abdedaime</div>
+	<div class="text text-center text-success">&copy; :
+		</div>
 </footer>

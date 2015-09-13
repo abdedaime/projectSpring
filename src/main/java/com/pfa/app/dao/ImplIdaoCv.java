@@ -1,5 +1,7 @@
 package com.pfa.app.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -51,6 +53,12 @@ public class ImplIdaoCv implements IdaoCv {
 	public Cv getCV(int id) {
 		// TODO Auto-generated method stub
 		return em.find(Cv.class, id);
+	}
+
+	@Override
+	public List<Competence> getCompetence(String mot) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
