@@ -1,11 +1,11 @@
 package com.pfa.app.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.pfa.app.dao.IdaoUser;
+import com.pfa.app.entities.Role;
 import com.pfa.app.entities.Utilisateur;
 /**
  * 
@@ -27,6 +27,12 @@ public class ServiceUser  implements IServiceUser {
 	public Utilisateur getUser(String email) {
 		// TODO Auto-generated method stub
 		return dao.getUser(email);
+	}
+
+	@Override
+	public void addRole(Role role) {
+		// TODO Auto-generated method stub
+		 dao.addRole(role);
 	}
 
 }

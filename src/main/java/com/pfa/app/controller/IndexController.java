@@ -22,6 +22,7 @@ import com.pfa.app.entities.Competence;
 import com.pfa.app.entities.Cv;
 import com.pfa.app.entities.Experience;
 import com.pfa.app.entities.Formation;
+import com.pfa.app.entities.Role;
 import com.pfa.app.entities.Utilisateur;
 import com.pfa.app.service.IApplicationMailer;
 import com.pfa.app.service.IServiceUser;
@@ -197,7 +198,13 @@ public class IndexController {
 			user.setPassword(PasswordToMd5(user.getPassword()));
 			user.setDate(new Date());
 			user.setEnabled(true);
+			  Role  role=new Role();
+			  role.setUser(user);
+			  role.setRole(user.getType());
+			 
+			System.out.println("-------------------"+user.getType());
 			iservice.add(user);
+			iservice.addRole(role);
 			model.addAttribute("succes", true);
 			model.addAttribute("user", new Utilisateur());
 

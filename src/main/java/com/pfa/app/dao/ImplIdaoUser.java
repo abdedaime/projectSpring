@@ -5,6 +5,7 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
+import com.pfa.app.entities.Role;
 import com.pfa.app.entities.Utilisateur;
 /**
  * 
@@ -27,6 +28,13 @@ public class ImplIdaoUser implements IdaoUser {
 	public Utilisateur getUser(String email) {
 		Utilisateur user = em.find(Utilisateur.class, email);
 		return user;
+	}
+
+	@Override
+	public void addRole(Role role) {
+		// TODO Auto-generated method stub
+		em.persist(role);
+		
 	}
 
 }

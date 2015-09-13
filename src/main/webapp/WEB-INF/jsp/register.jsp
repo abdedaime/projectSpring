@@ -15,13 +15,13 @@
 			</div>
 		</div>
 		<div class="panel-body">
-		<c:if   test="${succes eq true }"  >
-		  <div class="alert alert-success text-center">
-						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-						<strong>Info!</strong>   	Succes registration
-					</div>
-		
-		  </c:if>
+			<c:if test="${succes eq true }">
+				<div class="alert alert-success text-center">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>Info!</strong> Succes registration
+				</div>
+
+			</c:if>
 			<form:form id="signupform" modelAttribute="user" method="post"
 				class="form-horizontal" role="form">
 
@@ -84,12 +84,24 @@
 					<label for="date" class="col-md-3 control-label">Date de
 						Naissance</label>
 					<div class="col-md-9">
-						<form:input path="dateNaissance" class="form-control   madate"   id="date"
-							name="date" placeholder="Date de naissance" />
+						<form:input path="dateNaissance" class="form-control   madate"
+							id="date" name="date" placeholder="Date de naissance" />
 						<form:errors path="dateNaissance" cssClass="text text-danger" />
 					</div>
 				</div>
-				
+
+				<div class="form-group">
+					<label for="type" class="col-md-3 control-label">Type</label>
+					<div class="col-md-9">
+						<form:select class="form-control" name="type" id="type"
+							path="type">
+							<form:option  label="candidat" value="ROLE_User"></form:option>
+							<form:option  label="recruteur" value="ROLE_ADMIN"></form:option>
+						</form:select>
+						<form:errors path="type" class="inline-help text text-danger" />
+					</div>
+				</div>
+
 				<div class="form-group">
 					<!-- Button -->
 					<div class="col-md-offset-3 col-md-9">

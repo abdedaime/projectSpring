@@ -19,8 +19,9 @@ public class TestSendMail {
 	private IApplicationMailer send;
 
 	@Test
-	public void test() {
-		send.sendMail("hicham.suptech@gmail.com", "tettttttt", "hhhhhhhhhhhh");
+	public void test()   throws  Exception {
+	//	send.sendMail("hicham.suptech@gmail.com", "tettttttt", "hhhhhhhhhhhh");
+		send.sendMimeMessage("etud.hi@gmail.com", "hicham.suptech@gmail.com", "eeeeeee", "mesggsgsggs");
 
 	}
 

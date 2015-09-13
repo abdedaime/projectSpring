@@ -1,0 +1,24 @@
+<Ontology>
+
+	<Langages>
+		<Langage id="1">java</Langage>
+		<Langage id="2">css</Langage>
+		<Langage id="3">javascript</Langage>
+		<Langage id="4">php</Langage>
+	</Langages>
+
+
+	<Frameworks>
+		<Framework EcritEn="1" DedieA="back-end, desktop">spring</Framework>
+		<Framework EcritEn="1" DedieA="back-end, desktop">hibernate</Framework>
+		<Framework EcritEn="1" DedieA="back-end, desktop">ejb</Framework>
+		<Framework EcritEn="4" DedieA="back-end">cackephp</Framework>
+		<Framework EcritEn="4" DedieA="back-end">symfony</Framework>
+		<Framework EcritEn="2,3" DedieA="front-end">bootstrap</Framework>
+		<Framework EcritEn="3" DedieA="front-end">angular</Framework>
+		<Framework EcritEn="3,2" DedieA="front-end">semantic-ui</Framework>
+		<Framework EcritEn="3,2" DedieA="front-end, mobile">ionic</Framework>
+	</Frameworks>
+
+
+</Ontology>
