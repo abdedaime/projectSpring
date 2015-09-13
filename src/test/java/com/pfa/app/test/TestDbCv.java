@@ -3,6 +3,7 @@ package com.pfa.app.test;
 import static org.junit.Assert.*;
 
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -60,21 +61,31 @@ public class TestDbCv {
 
 	}
 
-//	@Test
-//	public void teAddExceperience() {
-//		cv = serviceCv.getCV(1);
-//
-//		Experience ex = new Experience("creation d'une application salesofrce",
-//				"mobiblanc", "devvvv", new Date(), new Date());
-//		ex.setCv(cv);
-//		serviceCv.addExperience(ex);
-//	}
+	// @Test
+	// public void teAddExceperience() {
+	// cv = serviceCv.getCV(1);
+	//
+	// Experience ex = new Experience("creation d'une application salesofrce",
+	// "mobiblanc", "devvvv", new Date(), new Date());
+	// ex.setCv(cv);
+	// serviceCv.addExperience(ex);
+	// }
 
+	/*
+	 * @Test public void teAddFormation() { Formation fr=new Formation("bac+5",
+	 * "software ingénieur", new Date(), new Date(), "commmentaire");
+	 * fr.setCv(serviceCv.getCV(1)); serviceCv.addFormation(fr); }
+	 */
 	@Test
-	public void teAddFormation() {
-     Formation   fr=new Formation("bac+5", "software ingénieur", new Date(), new Date(), "commmentaire");
-     fr.setCv(serviceCv.getCV(1));
-      serviceCv.addFormation(fr);
+	public void testGetcompetence() {
+
+		List<Competence> cmp = serviceCv.getCompetence("css");
+
+		System.out.println("----------------------" + cmp.size());
+
+		Utilisateur user = cmp.get(0).getCv().getUser();
+		System.out.println("---------------"+user.toString());
+
 	}
 
 }

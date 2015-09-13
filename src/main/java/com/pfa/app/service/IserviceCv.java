@@ -1,5 +1,7 @@
 package com.pfa.app.service;
 
+import java.util.List;
+
 import com.pfa.app.entities.Competence;
 import com.pfa.app.entities.Cv;
 import com.pfa.app.entities.Experience;
@@ -16,5 +18,6 @@ public interface IserviceCv {
 	public void addFormation(Formation  fr);
 	public void addExperience(Experience  ex);
 	public    Cv getCV(int id);
+	public List<Competence> getCompetence(String mot);
 
 }

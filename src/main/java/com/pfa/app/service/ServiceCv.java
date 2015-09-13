@@ -1,5 +1,7 @@
 package com.pfa.app.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +48,12 @@ public class ServiceCv implements IserviceCv {
 	public Cv getCV(int id) {
 		// TODO Auto-generated method stub
 		return daoCv.getCV(id);
+	}
+
+	@Override
+	public List<Competence> getCompetence(String mot) {
+		// TODO Auto-generated method stub
+		return daoCv.getCompetence(mot);
 	}
 
 }
