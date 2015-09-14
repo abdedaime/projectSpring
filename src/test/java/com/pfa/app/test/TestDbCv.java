@@ -1,22 +1,16 @@
 package com.pfa.app.test;
 
-import static org.junit.Assert.*;
-
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.pfa.app.entities.Competence;
 import com.pfa.app.entities.Cv;
-import com.pfa.app.entities.Experience;
-import com.pfa.app.entities.Formation;
 import com.pfa.app.entities.Utilisateur;
 import com.pfa.app.service.IServiceUser;
 import com.pfa.app.service.IserviceCv;
@@ -82,11 +76,9 @@ public class TestDbCv {
 		List<Competence> cmp = serviceCv.getCompetence("java");
 
 		System.out.println("----------------------" + cmp.size());
-		
-	
 
 		Utilisateur user = cmp.get(0).getCv().getUser();
-	//	System.out.println("---------------"+user.toString());
+		// System.out.println("---------------"+user.toString());
 
 	}
 

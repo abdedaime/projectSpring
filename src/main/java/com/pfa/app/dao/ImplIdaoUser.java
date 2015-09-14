@@ -1,7 +1,10 @@
 package com.pfa.app.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
@@ -36,5 +39,30 @@ public class ImplIdaoUser implements IdaoUser {
 		em.persist(role);
 		
 	}
+
+	@Override
+	public List<Utilisateur> getAllusers() {
+		// TODO Auto-generated method stub
+	  return	em.createQuery("select u From Utilisateur  u ").getResultList();
+		
+	}
+
+	@Override
+	public void UpdateUser(Utilisateur u) {
+		// TODO Auto-generated method stub
+		   try {
+			   Query query = em.createQuery(
+					      "UPDATE Utilisateur  u SET u.enabled =true " +
+					      "WHERE u.email='"+u.getEmail()+"'");
+					//  int updateCount = query.setParameter("p", u.getEmail()).executeUpdate();
+			 int id=  query.executeUpdate();
+					  System.out.println("+++++++++++++++++++"+id);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		 
+		
+			}
 
 }

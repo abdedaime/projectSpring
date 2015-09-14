@@ -8,21 +8,31 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import com.pfa.app.entities.Utilisateur;
+
 @Service("mailService")
 public class ApplicationMailer implements IApplicationMailer {
 	@Autowired
 	private JavaMailSender mailSender;
-
-	public void sendMail(String to, String subject, String body) {
+    @Override
+	public void sendMail(Utilisateur  user,String  token) {
 
 		SimpleMailMessage message = new SimpleMailMessage();
 
-		message.setTo(to);
-		message.setSubject(subject);
+		message.setTo(user.getEmail());
+		message.setSubject("Confirmez votre Inscription");
+		String body = "Cher Monsieur "+user.getNom()  +" "+user.getPrenom()+"  "
+				+"  Pour activer votre compte, vous devez cliquer sur le lien suivant :"+
+				
+				" http://localhost:8080/ProjectFind/doactiver.htm?token="+token 
+				
+				+  "  Veuillez trouver ci-dessous les informations que vous avez saisies lors de votre inscription."
+				+ " Conservez les précieusement." +
+                " Compte (login) : " +user.getEmail() + " Mot de passe : " +user.getPassword();
 		message.setText(body);
 		mailSender.send(message);
 	}
-
+    @Override
 	public void sendMimeMessage(String from, String to, String subject,
 			String msg) throws Exception {
 		MimeMessage mime = this.mailSender.createMimeMessage();

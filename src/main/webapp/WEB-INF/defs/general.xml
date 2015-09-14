@@ -30,6 +30,10 @@
 		<put-attribute name="current" value="cv" />
 	</definition>
 	
+	<definition name="active" template="/WEB-INF/jsp/active.jsp">
+		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
+	</definition>
+	
 	
 	
 

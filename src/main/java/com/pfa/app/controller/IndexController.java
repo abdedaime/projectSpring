@@ -67,6 +67,11 @@ public class IndexController {
 	public String indexz() {
 		return "index";
 	}
+	@RequestMapping(value = "/doactiver.htm", method = RequestMethod.GET)
+     public  String  activer(@RequestParam("token")  String  token) {
+		activerCompte(token.trim());
+		  return  "active";
+	  }
 
 	@RequestMapping("/addCv.htm")
 	public String cv(Model model) {
@@ -199,10 +204,11 @@ public class IndexController {
 			return "register";
 
 		} else {
+			app.sendMail(user,PasswordToMd5(user.getEmail().trim()));
 			user.setConfirmepass(PasswordToMd5(user.getPassword()));
 			user.setPassword(PasswordToMd5(user.getPassword()));
 			user.setDate(new Date());
-			user.setEnabled(true);
+			user.setEnabled(false);
 			Role role = new Role();
 			role.setUser(user);
 			role.setRole(user.getType());
@@ -246,6 +252,27 @@ public class IndexController {
 		// System.out.println(sb.toString());
 		return sb.toString();
 
+	}
+	
+	
+	private     void activerCompte(String token   ){
+		System.out.println("-----------------"+token);
+		 //String  encrypt=PasswordToMd5(token);
+		 // System.out.println(encrypt);
+ 		  //service.getAllusers()
+		 // System.out.println(service.getAllusers().size());
+ 		  for(Utilisateur   u :  iservice.getAllusers()){
+ 			  
+    
+ 			     if(PasswordToMd5(u.getEmail()).equals(token)){
+ 			    	 System.out.println("equaklkkkkkkkkks");
+ 			    	 u.setEnabled(true);
+ 			    	iservice.UpdateUser(u);
+ 			    	
+ 			    	 break;
+ 			     }
+ 		
+	}
 	}
 
 }
