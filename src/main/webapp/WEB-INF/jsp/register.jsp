@@ -23,7 +23,7 @@
 
 			</c:if>
 			<form:form id="signupform" modelAttribute="user" method="post"
-				class="form-horizontal" role="form">
+				class="form-horizontal" role="form"  enctype="multipart/form-data">
 
 				<div id="signupalert" style="display: none"
 					class="alert alert-danger">
@@ -95,10 +95,21 @@
 					<div class="col-md-9">
 						<form:select class="form-control" name="type" id="type"
 							path="type">
-							<form:option  label="candidat" value="ROLE_User"></form:option>
-							<form:option  label="recruteur" value="ROLE_ADMIN"></form:option>
+							<form:option label="candidat" value="ROLE_User"></form:option>
+							<form:option label="recruteur" value="ROLE_ADMIN"></form:option>
 						</form:select>
 						<form:errors path="type" class="inline-help text text-danger" />
+					</div>
+				</div>
+
+				
+			 				<div class="form-group">
+					<label for="date" class="col-md-3 control-label">Photo 
+						</label>
+					<div class="col-md-9">
+						<input   type="file"    class="form-control"
+							id="image" name="image"  />
+						
 					</div>
 				</div>
 
@@ -111,6 +122,7 @@
 
 					</div>
 				</div>
+
 
 
 

@@ -3,7 +3,6 @@
 
 
 
-<footer>
-	<div class="text text-center text-success">&copy; :
-		</div>
-</footer>
+<center>
+<strong>Powered by <a href="https://ma.linkedin.com/pub/hicham-abdedaime/aa/39a/130" target="_blank">Hicham Abdedaime</a></strong>
+</center>

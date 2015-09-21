@@ -3,8 +3,12 @@ package com.pfa.app.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
+import org.springframework.beans.factory.NoUniqueBeanDefinitionException;
 import org.springframework.stereotype.Repository;
 
 import com.pfa.app.entities.Competence;
@@ -60,6 +64,26 @@ public class ImplIdaoCv implements IdaoCv {
 		// TODO Auto-generated method stub
      System.out.println("-----------la requetttte ---------------"+ParsesrXpathJava.construireSql(mot));
 		return em.createQuery(ParsesrXpathJava.construireSql(mot)).getResultList();
+	}
+
+	@Override
+	public Cv getCV(String username) {
+		// TODO Auto-generated method stub
+		Query   qr=null;
+		try {
+			  qr=em.createQuery("select cv  from Cv  as cv where cv.user.email=:p ");
+			qr.setParameter("p", username);
+			return (Cv) qr.getSingleResult();
+			
+		} catch (NoResultException e) {
+			// TODO: handle exception
+			return null;
+		}
+		  catch (NonUniqueResultException      e) {
+			// TODO: handle exception
+			  return  (Cv) qr.getResultList().get(0);
+		}
+		
 	}
 
 }

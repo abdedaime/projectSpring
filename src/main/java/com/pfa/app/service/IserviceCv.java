@@ -19,5 +19,7 @@ public interface IserviceCv {
 	public void addExperience(Experience  ex);
 	public    Cv getCV(int id);
 	public List<Competence> getCompetence(String mot);
+	public Cv getCV(String  username );
+
 
 }

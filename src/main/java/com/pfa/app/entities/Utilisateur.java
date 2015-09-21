@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -55,8 +56,18 @@ public class Utilisateur    {
 	@Transient
 	private  String   type;
 	
+	@Lob
+	private  byte []  photo;
 	
 	
+  
+	public byte[] getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
 
 	public String getType() {
 		return type;

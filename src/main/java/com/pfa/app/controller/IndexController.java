@@ -1,15 +1,20 @@
 package com.pfa.app.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
 import java.util.Date;
 
-import javax.persistence.QueryHint;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.pfa.app.entities.Competence;
 import com.pfa.app.entities.Cv;
@@ -34,8 +40,14 @@ import com.pfa.app.service.IserviceCv;
  * @author PC-Mobiblanc-HP-02
  * 
  */
+// https://gist.github.com/kjunine/7578710
 @Controller
 public class IndexController {
+	
+	
+	@Value("#{'/resources/img/profile.png'}")
+	private Resource resource;
+	
 	@Autowired
 	private IApplicationMailer app;
 	@Autowired
@@ -63,15 +75,36 @@ public class IndexController {
 		return new Experience();
 	}
 
+	@RequestMapping(value = "image", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+	@ResponseBody
+	public byte[] getImage(String id)  throws  Exception{
+		Utilisateur user = iservice.getUser(id);
+		if(user.getPhoto()==null ){
+			InputStream in = resource.getInputStream();
+			return IOUtils.toByteArray(in);
+		}
+		return user.getPhoto();
+	}
+
 	@RequestMapping("/")
 	public String indexz() {
-		return "index";
+		return "login";
 	}
+
 	@RequestMapping(value = "/doactiver.htm", method = RequestMethod.GET)
-     public  String  activer(@RequestParam("token")  String  token) {
+	public String activer(@RequestParam("token") String token) {
 		activerCompte(token.trim());
-		  return  "active";
-	  }
+		return "active";
+	}
+
+	@RequestMapping(value = "/profil.htm", method = RequestMethod.GET)
+	public String profil(Model model, Principal pr) {
+
+		Utilisateur user = iservice.getUser(pr.getName());
+		model.addAttribute("useer", user);
+		model.addAttribute("cvv", serviceCv.getCV(pr.getName()));
+		return "profil";
+	}
 
 	@RequestMapping("/addCv.htm")
 	public String cv(Model model) {
@@ -89,15 +122,15 @@ public class IndexController {
 
 		return "index";
 	}
+
 	@RequestMapping(value = "/index.htm", method = RequestMethod.POST)
 	public String search(@RequestParam("search") String mot, Model model) {
 		model.addAttribute("userr", serviceCv.getCompetence(mot));
-        return "index";
+		return "index";
 	}
 
 	@RequestMapping(value = "/login.htm", method = RequestMethod.GET)
-	public String login() {
-
+	public String login(Model model) {
 		return "login";
 	}
 
@@ -194,7 +227,8 @@ public class IndexController {
 
 	@RequestMapping(value = "/register.htm", method = RequestMethod.POST)
 	public String login(@ModelAttribute("user") @Valid Utilisateur user,
-			BindingResult bin, Model model) {
+			BindingResult bin, Model model,
+			@RequestParam("image") MultipartFile file) {
 		System.out.println("tessssssssssst" + bin.toString());
 
 		if (bin.hasErrors()) {
@@ -204,7 +238,17 @@ public class IndexController {
 			return "register";
 
 		} else {
-			app.sendMail(user,PasswordToMd5(user.getEmail().trim()));
+			byte[] content = null;
+			if (!file.isEmpty()) {
+				try {
+					content = file.getBytes();
+				} catch (IOException e) {
+
+					e.printStackTrace();
+				}
+			}
+			app.sendMail(user, PasswordToMd5(user.getEmail().trim()));
+			user.setPhoto(content);
 			user.setConfirmepass(PasswordToMd5(user.getPassword()));
 			user.setPassword(PasswordToMd5(user.getPassword()));
 			user.setDate(new Date());
@@ -253,26 +297,24 @@ public class IndexController {
 		return sb.toString();
 
 	}
-	
-	
-	private     void activerCompte(String token   ){
-		System.out.println("-----------------"+token);
-		 //String  encrypt=PasswordToMd5(token);
-		 // System.out.println(encrypt);
- 		  //service.getAllusers()
-		 // System.out.println(service.getAllusers().size());
- 		  for(Utilisateur   u :  iservice.getAllusers()){
- 			  
-    
- 			     if(PasswordToMd5(u.getEmail()).equals(token)){
- 			    	 System.out.println("equaklkkkkkkkkks");
- 			    	 u.setEnabled(true);
- 			    	iservice.UpdateUser(u);
- 			    	
- 			    	 break;
- 			     }
- 		
-	}
+
+	private void activerCompte(String token) {
+		System.out.println("-----------------" + token);
+		// String encrypt=PasswordToMd5(token);
+		// System.out.println(encrypt);
+		// service.getAllusers()
+		// System.out.println(service.getAllusers().size());
+		for (Utilisateur u : iservice.getAllusers()) {
+
+			if (PasswordToMd5(u.getEmail()).equals(token)) {
+				System.out.println("equaklkkkkkkkkks");
+				u.setEnabled(true);
+				iservice.UpdateUser(u);
+
+				break;
+			}
+
+		}
 	}
 
 }

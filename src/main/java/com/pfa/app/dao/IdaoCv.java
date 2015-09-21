@@ -22,6 +22,7 @@ public interface IdaoCv {
 	public void addExperience(Experience ex);
 
 	public Cv getCV(int id);
+	public Cv getCV(String  username );
 
 	public List<Competence> getCompetence(String mot);
 

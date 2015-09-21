@@ -45,7 +45,9 @@
 							<li class="${current == 'index' ? 'active' : ''}"><a
 								href="index.htm">Accueil</a></li>
 						</security:authorize>
-						<li><a href="#">Profil</a></li>
+						<security:authorize access="isAuthenticated()">
+						<li class="${current == 'profil' ? 'active' : ''}"><a href="profil.htm">Profil</a></li>
+						</security:authorize>
 						<security:authorize access="isAuthenticated()">
 							<li><a href="<spring:url value="/logout" />">Déconnexion</a></li>
 						</security:authorize>

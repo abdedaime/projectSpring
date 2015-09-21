@@ -46,14 +46,20 @@ public class ServiceCv implements IserviceCv {
 
 	@Override
 	public Cv getCV(int id) {
-		// TODO Auto-generated method stub
+		
 		return daoCv.getCV(id);
 	}
 
 	@Override
 	public List<Competence> getCompetence(String mot) {
-		// TODO Auto-generated method stub
+		
 		return daoCv.getCompetence(mot);
+	}
+
+	@Override
+	public Cv getCV(String username) {
+		
+		return daoCv.getCV(username);
 	}
 
 }

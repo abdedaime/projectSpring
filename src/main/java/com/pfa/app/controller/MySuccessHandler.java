@@ -10,7 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-
+/**
+ * 
+ * @author hicham-pc
+ *
+ */
 public class MySuccessHandler   implements  AuthenticationSuccessHandler  {
 
     @Override

@@ -34,7 +34,11 @@
 		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
 	</definition>
 	
-	
+		<definition name="profil" extends="common">
+		<put-attribute name="title" value="Votre profil" />
+		<put-attribute name="body" value="/WEB-INF/jsp/profil.jsp" />
+		<put-attribute name="current" value="profil" />
+	</definition>
 	
 
 
