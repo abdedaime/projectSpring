@@ -99,10 +99,16 @@ public class IndexController {
 
 	@RequestMapping(value = "/profil.htm", method = RequestMethod.GET)
 	public String profil(Model model, Principal pr) {
+      try {
 
-		Utilisateur user = iservice.getUser(pr.getName());
-		model.addAttribute("useer", user);
-		model.addAttribute("cvv", serviceCv.getCV(pr.getName()));
+  		Utilisateur user = iservice.getUser(pr.getName());
+  		model.addAttribute("useer", user);
+  		model.addAttribute("cvv", serviceCv.getCV(pr.getName()));
+		
+	} catch (NullPointerException e) {
+		// TODO: handle exception
+		return "redirect:login.htm";
+	}
 		return "profil";
 	}
 

@@ -48,26 +48,72 @@
 						<security:authorize access="isAuthenticated()">
 						<li class="${current == 'profil' ? 'active' : ''}"><a href="profil.htm">Profil</a></li>
 						</security:authorize>
-						<security:authorize access="isAuthenticated()">
-							<li><a href="<spring:url value="/logout" />">Déconnexion</a></li>
-						</security:authorize>
+						
 
 						<security:authorize access="!isAuthenticated()">
 							<li class="${current == 'login' ? 'active' : ''}"><a
 								href="login.htm">Authentification</a></li>
 						</security:authorize>
-												<security:authorize access="hasRole('ROLE_User')">
+					<security:authorize access="hasRole('ROLE_User')">
 							<li class="${current == 'cv' ? 'active' : ''}"><a
 								href="addCv.htm">Cv théque</a></li>
-						</security:authorize>
+				    </security:authorize>
 
 
 					</ul>
-					<!--           <ul class="nav navbar-nav navbar-right"> -->
-					<!--             <li><a href="../navbar/">Default</a></li> -->
-					<!--             <li><a href="../navbar-static-top/">Static top</a></li> -->
-					<!--             <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li> -->
-					<!--           </ul> -->
+	           <security:authorize access="isAuthenticated()">
+					
+					 <ul class="nav navbar-nav navbar-right">
+                                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Account
+                                        <b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <div class="navbar-content">
+                                                    <div class="row">
+                                                        <div class="col-md-5">
+                                                            <img src='image?id=${access.email}'
+                                                                alt="Alternate Text" class="img-responsive" />
+                                                            <p class="text-center small">
+                                                                <a href="#">Change Photo</a></p>
+                                                        </div>
+                                                        <div class="col-md-7">
+                                                            <span>${access.prenom} ${access.nom}</span>
+                                                            <p class="text-muted small">
+                                                               ${access.email}</p>
+                                                            <div class="divider">
+                                                            </div>
+                                                            <a href="profil.htm" class="btn btn-primary btn-sm active">View Profile</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="navbar-footer">
+                                                    <div class="navbar-footer-content">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <a onclick="alert('cliked');" href="#" class="btn btn-default btn-sm">Change Passowrd</a>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <a href="logout" class="btn btn-default btn-sm pull-right">Déconnexion</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+					
+					</security:authorize>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
 				</div>
 				<!--/.nav-collapse -->
 			</div>

@@ -40,6 +40,7 @@ public class ImplIdaoUser implements IdaoUser {
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Utilisateur> getAllusers() {
 		// TODO Auto-generated method stub
